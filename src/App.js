@@ -14,9 +14,9 @@ function App() {
     setProduct(resJson)
   }
 
-  async function onChange(e) {
+  async function onChange(paramName, value) {
     let newProduct = { ...product }
-    newProduct.name = e.target.value
+    newProduct[paramName] = value
     setProduct(newProduct)
 
   }
@@ -31,7 +31,8 @@ function App() {
           className="h1"
           value={product.name}
           onChange={(e) => {
-            onChange(e)
+            let value = e.target.value
+            onChange('name', value)
           }}
         />
       </div>
@@ -43,11 +44,12 @@ function App() {
         <input className="product"
           value={product.image}
           onChange={(e) => {
-            onChange(e)
+            let value = e.target.value
+            onChange('image', value)
           }}
         />
       </div>
-<br></br>
+      <br></br>
       {/* INGREDIENTS */}
       <div className="product">{
         product.ingreS?.map((ingredient, index) => {
@@ -59,15 +61,13 @@ function App() {
 
       {/*DESCRIPTION*/}
       <div className="product">
-        {product.description}
-        
-        <input 
-        className="product"
-          value={product.description}
+        <textarea value={product.description} rows="5"
           onChange={(e) => {
-            onChange(e)
+            let value = e.target.value
+            onChange('description', value)
           }}
-        />
+        >
+        </textarea>
       </div>
     </div>
   );
